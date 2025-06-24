@@ -1,24 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { ThemeProvider } from "@mui/material";
+import Home from "./Customer/pages/Home/Home";
+
+import greenTheme from "./Theme/greenTheme";
+
 
 function App() {
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={greenTheme}>
+      <div className="relative">
+          <h1 className="text-center text-3xl font-bold text-purple-700 py-4 shadow-md bg-white">
+            ✨ Welcome to Saloon! ✨
+          </h1>
+
+          <Home/>
+        
+        
+      </div>
+    </ThemeProvider>
   );
 }
 
