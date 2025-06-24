@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@mui/material";
-// import Home from "./Customer/pages/Home/Home";
+import Home from "./Customer/pages/Home/Home";
 
 import greenTheme from "./Theme/greenTheme";
 
@@ -15,7 +15,7 @@ function App() {
             ✨ Welcome to Saloon! ✨
           </h1>
 
-          {/* <Home/> */}
+          <Home/>
           <SalonDetails/>
         
         
