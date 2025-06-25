@@ -1,26 +1,25 @@
-import React from "react";
-// import ServiceCard from "./ServiceCard";
-
-
+import React, { useState } from "react";
+import { Button, Divider } from "@mui/material";
 import SalonDetail from "./SalonDetail";
+import SalonServiceDetails from "./SalonServiceDetails";
 
-// const tabs = [
-//   { name: "All Services" },
-//   { name: "Reviews" },
-//   { name: "Create Review" },
-// ];
+const tabs = [
+  { name: "All Services" },
+  { name: "Reviews" },
+  { name: "Create Review" },
+];
 
 const SalonDetails = () => {
-//   const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [activeTab, setActiveTab] = useState(tabs[0]);
 
-//   const handleActiveTab = (tab) => () => {
-//     setActiveTab(tab);
-//   };
+  const handleActiveTab = (tab) => () => {
+    setActiveTab(tab);
+  };
 
   return (
     <div className="px-5 lg:px-20">
       <SalonDetail />
-      {/* <div className="space-y-5">
+      <div className="space-y-5">
         <div className="flex gap-2">
           {tabs.map((tab) => (
             <Button
@@ -33,7 +32,20 @@ const SalonDetails = () => {
           ))}
         </div>
         <Divider />
-      </div> */}
+      </div>
+      <div>
+        {activeTab?.name === "Create Review" ? (
+          <div className="flex justify-center ">
+            CreateReviewForm 
+          </div>
+        ) : activeTab.name === "Reviews" ? (
+          <div>
+            Review list
+          </div>
+        ) : (
+          <SalonServiceDetails />
+        )}
+      </div>
     </div>
   );
 };
