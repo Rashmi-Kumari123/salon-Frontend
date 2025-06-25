@@ -1,10 +1,13 @@
 import { ThemeProvider } from "@mui/material";
-import Home from "./Customer/pages/Home/Home";
+// import Home from "./Customer/pages/Home/Home";
 
 import greenTheme from "./Theme/greenTheme";
 
 import SalonDetails from "./Customer/pages/Salon/SalonDetails/SalonDetails";
 import SalonServiceDetails from "./Customer/pages/Salon/SalonDetails/SalonServiceDetails";
+import SelectedServiceList from "./Customer/pages/Salon/SalonDetails/SelectedServiceList";
+import Review from "./Customer/pages/Salon/Reviews/Review";
+
 
 
 function App() {
@@ -16,9 +19,12 @@ function App() {
             ✨ Welcome to Saloon! ✨
           </h1>
 
-          <Home/>
+          {/* <Home/> */}
           <SalonDetails/>
-          <SalonServiceDetails/>
+          <SalonServiceDetails/> 
+          <SelectedServiceList/>
+          <Review/>
+          
         
         
       </div>
