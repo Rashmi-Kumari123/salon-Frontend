@@ -4,6 +4,7 @@ import Home from "./Customer/pages/Home/Home";
 import greenTheme from "./Theme/greenTheme";
 
 import SalonDetails from "./Customer/pages/Salon/SalonDetails/SalonDetails";
+import SalonServiceDetails from "./Customer/pages/Salon/SalonDetails/SalonServiceDetails";
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 
           <Home/>
           <SalonDetails/>
+          <SalonServiceDetails/>
         
         
       </div>
