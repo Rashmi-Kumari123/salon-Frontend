@@ -2,11 +2,13 @@ import { ThemeProvider } from "@mui/material";
 // import Home from "./Customer/pages/Home/Home";
 
 import greenTheme from "./Theme/greenTheme";
+import Navbar from "./Customer/pages/Navbar/Navbar";
+// import { Notifications } from "@mui/icons-material";
+// import Notification from "./Customer/pages/Notifications/Notification";
+// import Bookings from "./Customer/pages/Bookings/Bookings";
 
-import SalonDetails from "./Customer/pages/Salon/SalonDetails/SalonDetails";
-import SalonServiceDetails from "./Customer/pages/Salon/SalonDetails/SalonServiceDetails";
-import SelectedServiceList from "./Customer/pages/Salon/SalonDetails/SelectedServiceList";
-import Review from "./Customer/pages/Salon/Reviews/Review";
+// import SalonDetails from "./Customer/pages/Salon/SalonDetails/SalonDetails";
+// import Review from "./Customer/pages/Salon/Reviews/Review";
 
 
 
@@ -20,10 +22,12 @@ function App() {
           </h1>
 
           {/* <Home/> */}
-          <SalonDetails/>
-          <SalonServiceDetails/> 
-          <SelectedServiceList/>
-          <Review/>
+          {/* <SalonDetails/> */}
+         
+          {/* <Review/> */}
+          {/* <Bookings/> */}
+          {/* <Notification/> */}
+          <Navbar/>
           
         
         
