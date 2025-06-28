@@ -6,7 +6,7 @@ const BookingCard = () => {
   return (
     <div className="p-5 rounded-md bg-slate-100 md:flex items-center justify-between">
       <div className="space-y-2">
-        <h1 className="text-2xl font-bold"> Rashmi Salon</h1>
+        <h1 className="text-2xl font-bold"> Rashmi Shah Salon</h1>
         <div>
           <li> Hair Cut </li>
           <li> Massage Therapy</li>
