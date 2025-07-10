@@ -1,9 +1,8 @@
 import React from "react";
 import { services } from "../../../Data/Services";
 import HomeServiceCard from "./HomeServiceCard";
-import SalonList from "../Salon/SalonList";
+// import SalonList from "../Salon/SalonList";
 import Banner from "./Banner";
-
 
 const Home = () => {
   
@@ -58,7 +57,6 @@ const Home = () => {
       <section className="px-20">
         <h1 className="text-3xl font-bold pb-10 ">Book Your Favorite Salon</h1>
         {/* <SalonList salons={salon.salons} /> */}
-        <SalonList/>
       </section>
     </div>
   );
