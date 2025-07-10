@@ -2,10 +2,9 @@ import { ThemeProvider } from "@mui/material";
 
 import greenTheme from "./Theme/greenTheme";
 import { Route, Routes } from "react-router-dom";
-import SalonDashboard from "./salon/SellerDashboard/SalonDashboard";
+
 import CustomerRoutes from "./routes/CustomerRoutes";
-
-
+import SalonDashboard from "./salon/pages/SellerDashboard/SalonDashboard";
 
 
 function App() {
@@ -17,14 +16,11 @@ function App() {
           {/* ✨ Welcome to Saloon! ✨ */}
         </h1>
 
-        
         <Routes>
           <Route path="/salon-dashboard/*" element={<SalonDashboard />} />
           <Route path="*" element={<CustomerRoutes />} />
-          
+
         </Routes>
-
-
 
       </div>
     </ThemeProvider>
