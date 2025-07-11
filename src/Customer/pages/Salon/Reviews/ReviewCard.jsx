@@ -14,12 +14,10 @@ const ReviewCard = () => {
               className="text-white"
               sx={{ width: 56, height: 56, bgcolor: "#9155FD" }}
             >
-              {/* Placeholder for user initials */}
-              R
+              {/* Placeholder for user initials */}R
             </Avatar>
           </Box>
         </Grid>
-
         {/* Review Content */}
         <Grid item xs={10}>
           <div className="space-y-2">
@@ -28,17 +26,11 @@ const ReviewCard = () => {
               <p className="opacity-70">2025-06-25 17:34:57.140056</p>
             </div>
 
-            <Rating
-              readOnly
-              value={4.5}
-              name="half-rating"
-              precision={0.5}
-            />
+            <Rating readOnly value={4.5} name="half-rating" precision={0.5} />
 
             <p>Good service is available here</p>
           </div>
         </Grid>
-
         {/* Delete Button */}
         <Grid item xs={1}>
           <IconButton>

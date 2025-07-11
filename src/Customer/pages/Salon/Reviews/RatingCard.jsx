@@ -1,16 +1,11 @@
-import React from 'react';
-import { Grid, Box, LinearProgress, Rating } from '@mui/material';
+import React from "react";
+import { Grid, Box, LinearProgress, Rating } from "@mui/material";
 
 const RatingCard = () => {
   return (
     <div className="border p-5 rounded-md">
       <div className="flex items-center space-x-3 pb-10">
-        <Rating
-          name="read-only"
-          value={4.6}
-          precision={0.5}
-          readOnly
-        />
+        <Rating name="read-only" value={4.6} precision={0.5} readOnly />
         <p className="opacity-60">Ratings</p>
       </div>
 
@@ -54,7 +49,6 @@ const RatingCard = () => {
         </Grid>
       </Box>
 
-      
       <Box>
         <Grid container alignItems="center" spacing={2}>
           <Grid item xs={2}>
