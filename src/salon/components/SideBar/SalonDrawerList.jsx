@@ -1,6 +1,17 @@
-import { AccountBalanceWallet, AccountBox, Add, Category, Dashboard, Inventory, Logout, NotificationsNoneOutlined, Receipt, ShoppingBag } from '@mui/icons-material';
-import React from 'react'
-import DrawerList from '../../../Admin/components/DrawerList';
+import {
+  AccountBalanceWallet,
+  AccountBox,
+  Add,
+  Category,
+  Dashboard,
+  Inventory,
+  Logout,
+  NotificationsNoneOutlined,
+  Receipt,
+  ShoppingBag,
+} from "@mui/icons-material";
+import React from "react";
+import DrawerList from "../../../Admin/components/DrawerList";
 
 const menu = [
   {
@@ -8,7 +19,7 @@ const menu = [
     path: "/salon-dashboard",
     icon: <Dashboard className="text-primary-color" />,
     activeIcon: <Dashboard className="text-white" />,
-  }, 
+  },
   {
     name: "Bookings",
     path: "/salon-dashboard/bookings",
@@ -51,17 +62,14 @@ const menu = [
     icon: <NotificationsNoneOutlined className="text-primary-color" />,
     activeIcon: <NotificationsNoneOutlined className="text-white" />,
   },
- 
 ];
 
 const menu2 = [
-  
   {
     name: "Account",
     path: "/salon-dashboard/account",
     icon: <AccountBox className="text-primary-color" />,
     activeIcon: <AccountBox className="text-white" />,
-    
   },
   {
     name: "Logout",
@@ -71,12 +79,8 @@ const menu2 = [
   },
 ];
 
-
-const SalonDrawerList = ({toggleDrawer}) => {
-  return (
-    
-   <DrawerList menu={menu} menu2={menu2} toggleDrawer={toggleDrawer}/>
-  )
-}
+const SalonDrawerList = ({ toggleDrawer }) => {
+  return <DrawerList menu={menu} menu2={menu2} toggleDrawer={toggleDrawer} />;
+};
 
 export default SalonDrawerList;

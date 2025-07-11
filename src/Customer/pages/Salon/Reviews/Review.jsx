@@ -11,19 +11,18 @@ const Review = () => {
 
         <ReviewCard />
       </section>
-     <section className="w-full md:w-1/2 lg:w-[60%]">
-  <div className="mt-10">
-    <div className="space-y-5">
-      {[1, 1, 1].map((item) => (
-        <div className="space-y-4">
-          <RatingCard />
-          <Divider />
+      <section className="w-full md:w-1/2 lg:w-[60%]">
+        <div className="mt-10">
+          <div className="space-y-5">
+            {[1, 1, 1].map((item) => (
+              <div className="space-y-4">
+                <RatingCard />
+                <Divider />
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
+      </section>
     </div>
   );
 };
