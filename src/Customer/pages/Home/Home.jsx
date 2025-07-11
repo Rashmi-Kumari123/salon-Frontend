@@ -5,7 +5,6 @@ import HomeServiceCard from "./HomeServiceCard";
 import Banner from "./Banner";
 
 const Home = () => {
-  
   return (
     <div className="space-y-20 ">
       <section>
@@ -14,7 +13,7 @@ const Home = () => {
       <section className="space-y-10 lg:space-y-0 lg:flex items-center gap-5 px-20">
         <div className="w-full lg:w-1/2 ">
           <h1 className="text-2xl font-semibold pb-9">
-            What are you waiting for, Bestie? 👀 👑 Your glow-up starts here!" 
+            What are you waiting for, Bestie? 👀 👑 Your glow-up starts here!"
           </h1>
           <div className="flex flex-wrap justify-center items-center gap-5">
             {services.map((item) => (
@@ -35,7 +34,6 @@ const Home = () => {
               className="h-full w-full rounded-md"
               src="https://img.freepik.com/free-photo/portrait-hairstylist-female-customer_329181-1955.jpg?semt=ais_items_boosted&w=740"
               alt=""
-              
             />
           </div>
           <div className="row-span-7">

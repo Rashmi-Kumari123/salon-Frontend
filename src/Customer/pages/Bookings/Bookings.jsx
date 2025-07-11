@@ -1,5 +1,5 @@
-import React from 'react'
-import BookingCard from './BookingCard';
+import React from "react";
+import BookingCard from "./BookingCard";
 
 const Bookings = () => {
   return (
@@ -8,12 +8,10 @@ const Bookings = () => {
         <h1 className="text-3xl font-bold py-5">My Bookings</h1>
       </div>
       <div className="space-y-4 md:w-[35rem]">
-        
-          <BookingCard/>
-        
+        <BookingCard />
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Bookings;

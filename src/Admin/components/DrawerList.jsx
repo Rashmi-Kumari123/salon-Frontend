@@ -1,15 +1,15 @@
 import React from "react";
-import { ListItemIcon, ListItemText, Divider } from '@mui/material';
+import { ListItemIcon, ListItemText, Divider } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const DrawerList = ({ menu, menu2 , toggleDrawer}) => {
+const DrawerList = ({ menu, menu2, toggleDrawer }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleClick = (item) => () => {
     navigate(item.path);
-    if(toggleDrawer){
-        toggleDrawer(false)();
+    if (toggleDrawer) {
+      toggleDrawer(false)();
     }
   };
 
@@ -33,7 +33,9 @@ const DrawerList = ({ menu, menu2 , toggleDrawer}) => {
                 } flex items-center px-5 py-3 rounded-r-full`}
               >
                 <ListItemIcon>
-                  {item.path === location.pathname ? item.activeIcon : item.icon}
+                  {item.path === location.pathname
+                    ? item.activeIcon
+                    : item.icon}
                 </ListItemIcon>
                 <ListItemText>{item.name}</ListItemText>
               </div>
@@ -58,7 +60,9 @@ const DrawerList = ({ menu, menu2 , toggleDrawer}) => {
                   } flex items-center px-5 py-3 rounded-r-full`}
                 >
                   <ListItemIcon>
-                    {item.path === location.pathname ? item.activeIcon : item.icon}
+                    {item.path === location.pathname
+                      ? item.activeIcon
+                      : item.icon}
                   </ListItemIcon>
                   <ListItemText>{item.name}</ListItemText>
                 </div>

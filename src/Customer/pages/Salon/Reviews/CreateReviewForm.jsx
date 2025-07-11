@@ -1,14 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 // import * as Yup from "yup";
-import {
-  TextField,
-  Button,
-  Box,
-  Rating,
-  InputLabel
-} from "@mui/material";
-
+import { TextField, Button, Box, Rating, InputLabel } from "@mui/material";
 
 const CreateReviewForm = () => {
   const formik = useFormik({
@@ -26,13 +19,11 @@ const CreateReviewForm = () => {
     //     .max(5, "Rating cannot be more than 5"),
     // }),
     onSubmit: (values) => {
-    
-        console.log("Form Submitted:", values);
-      }
-    
+      console.log("Form Submitted:", values);
+    },
   });
 
-    return (
+  return (
     <Box
       component="form"
       onSubmit={formik.handleSubmit}
