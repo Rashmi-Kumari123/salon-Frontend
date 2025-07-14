@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import {
   TextField,
@@ -18,7 +18,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 
 const CreateServiceForm = () => {
-  const [uploadImage, setUploadingImage] = useState(false);
+  // const [uploadImage, setUploadingImage] = useState(false);
   const [snackbarOpen, setOpenSnackbar] = useState(false);
 
 
