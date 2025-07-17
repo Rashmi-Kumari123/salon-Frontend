@@ -15,9 +15,9 @@ import {
   UPDATE_BOOKING_STATUS_SUCCESS,
   UPDATE_BOOKING_STATUS_FAILURE,
   GET_SALON_REPORT_SUCCESS,
-  FETCH_BOOKED_SLOTS_REQUEST,
+  // FETCH_BOOKED_SLOTS_REQUEST,
   FETCH_BOOKED_SLOTS_SUCCESS,
-  FETCH_BOOKED_SLOTS_FAILURE,
+  // FETCH_BOOKED_SLOTS_FAILURE,
 } from "./actionTypes";
 
 const initialState = {
@@ -26,7 +26,7 @@ const initialState = {
   booking: null,
   loading: false,
   error: null,
-  report:null,
+  report: null,
 };
 
 const bookingReducer = (state = initialState, action) => {
@@ -63,13 +63,13 @@ const bookingReducer = (state = initialState, action) => {
         loading: false,
         report: action.payload,
       };
-      case FETCH_BOOKED_SLOTS_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          slots: action.payload,
-          error: null,
-        };
+    case FETCH_BOOKED_SLOTS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        slots: action.payload,
+        error: null,
+      };
 
     case CREATE_BOOKING_FAILURE:
     case FETCH_CUSTOMER_BOOKINGS_FAILURE:

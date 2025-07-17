@@ -26,7 +26,7 @@ import api from "../../config/api";
 
 const API_BASE_URL = "/api/bookings";
 
-export const createBooking = ({jwt, salonId, bookingData}) => async (dispatch) => {
+export const createBooking = ({ jwt, salonId, bookingData }) => async (dispatch) => {
   dispatch({ type: CREATE_BOOKING_REQUEST });
   try {
     const { data } = await api.post(
@@ -34,14 +34,14 @@ export const createBooking = ({jwt, salonId, bookingData}) => async (dispatch) =
       bookingData,
       {
         headers: { Authorization: `Bearer ${jwt}` },
-        params: { salonId, paymentMethod:"RAZORPAY" },
+        params: { salonId, paymentMethod: "RAZORPAY" },
       }
     );
-    window.location.href=data.payment_link_url
+    window.location.href = data.payment_link_url
     console.log(" create booking ", data)
     dispatch({ type: CREATE_BOOKING_SUCCESS, payload: data });
   } catch (error) {
-    console.log("error creating booking ",error)
+    console.log("error creating booking ", error)
     dispatch({ type: CREATE_BOOKING_FAILURE, payload: error.message });
   }
 };
@@ -52,24 +52,24 @@ export const fetchCustomerBookings = (jwt) => async (dispatch) => {
     const { data } = await api.get(`${API_BASE_URL}/customer`, {
       headers: { Authorization: `Bearer ${jwt}` },
     });
-    console.log("customer bookings ",data)
+    console.log("customer bookings ", data)
     dispatch({ type: FETCH_CUSTOMER_BOOKINGS_SUCCESS, payload: data });
   } catch (error) {
-    console.log("error ",error)
+    console.log("error ", error)
     dispatch({ type: FETCH_CUSTOMER_BOOKINGS_FAILURE, payload: error.message });
   }
 };
 
-export const fetchSalonBookings = ({jwt}) => async (dispatch) => {
+export const fetchSalonBookings = ({ jwt }) => async (dispatch) => {
   dispatch({ type: FETCH_SALON_BOOKINGS_REQUEST });
   try {
-    const { data } = await api.get(`${API_BASE_URL}/salon`,{
+    const { data } = await api.get(`${API_BASE_URL}/salon`, {
       headers: { Authorization: `Bearer ${jwt}` },
     });
-    console.log("salon bookings ",data)
+    console.log("salon bookings ", data)
     dispatch({ type: FETCH_SALON_BOOKINGS_SUCCESS, payload: data });
   } catch (error) {
-    console.log("error fetching salon bookings ",error)
+    console.log("error fetching salon bookings ", error)
     dispatch({ type: FETCH_SALON_BOOKINGS_FAILURE, payload: error.message });
   }
 };
@@ -85,44 +85,44 @@ export const fetchBookingById = (bookingId) => async (dispatch) => {
   }
 };
 
-export const updateBookingStatus = ({bookingId, status, jwt}) => async (dispatch) => {
+export const updateBookingStatus = ({ bookingId, status, jwt }) => async (dispatch) => {
   dispatch({ type: UPDATE_BOOKING_STATUS_REQUEST });
   try {
     const { data } = await api.put(`${API_BASE_URL}/${bookingId}/status`, null, {
       headers: { Authorization: `Bearer ${jwt}` },
       params: { status },
     });
-    console.log("update booking status ",data)
+    console.log("update booking status ", data)
     dispatch({ type: UPDATE_BOOKING_STATUS_SUCCESS, payload: data });
   } catch (error) {
-    console.log("error updating booking status ",error)
+    console.log("error updating booking status ", error)
     dispatch({ type: UPDATE_BOOKING_STATUS_FAILURE, payload: error.message });
   }
 };
 
 export const getSalonReport = (jwt) => async (dispatch) => {
   try {
-      dispatch({ type: GET_SALON_REPORT_REQUEST });
+    dispatch({ type: GET_SALON_REPORT_REQUEST });
 
-      
-      const response = await api.get('/api/bookings/report', {
-          headers: {
-              'Authorization': `Bearer ${jwt}`
-          }
-      });
 
-      dispatch({
-          type: GET_SALON_REPORT_SUCCESS,
-          payload: response.data, 
-      });
-      console.log("bookings report ",response.data)
+    const response = await api.get('/api/bookings/report', {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+    dispatch({
+      type: GET_SALON_REPORT_SUCCESS,
+      payload: response.data,
+    });
+    console.log("bookings report ", response.data)
   } catch (error) {
-    console.log("error ",error)
-      
-      dispatch({
-          type: GET_SALON_REPORT_FAILURE,
-          payload: error.response ? error.response.data : error.message, 
-      });
+    console.log("error ", error)
+
+    dispatch({
+      type: GET_SALON_REPORT_FAILURE,
+      payload: error.response ? error.response.data : error.message,
+    });
   }
 };
 
@@ -143,7 +143,7 @@ export const fetchBookedSlotsFailure = (error) => ({
 });
 
 // Thunk action to fetch booked slots
-export const fetchBookedSlots = ({salonId, date, jwt}) => async (dispatch) => {
+export const fetchBookedSlots = ({ salonId, date, jwt }) => async (dispatch) => {
   dispatch(fetchBookedSlotsRequest());
 
   try {
@@ -158,7 +158,7 @@ export const fetchBookedSlots = ({salonId, date, jwt}) => async (dispatch) => {
     console.log("fetch booked slots: ", response.data);
     dispatch(fetchBookedSlotsSuccess(response.data));
   } catch (error) {
-    console.log("fetch booked slots error - : ",error);
+    console.log("fetch booked slots error - : ", error);
     dispatch(fetchBookedSlotsFailure(error.message));
   }
 };
