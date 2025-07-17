@@ -44,7 +44,7 @@ const Navbar = () => {
           </Badge>
         </IconButton>
         {/* true */}
-        {true ? (
+        {false? (
           <div className="flex gap-1 items-center">
             <h1 className="text-lg font-semibold"> Salon </h1>
             <IconButton
@@ -78,7 +78,7 @@ const Navbar = () => {
             </Menu>
           </div>
         ) : (
-          <IconButton>
+          <IconButton onClick={() => navigate("/login")}>
             <AccountCircle sx={{ fontSize: "45px", color: "green" }} />
           </IconButton>
         )}
