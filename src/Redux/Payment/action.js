@@ -7,7 +7,7 @@ import {
 import api from "../../config/api";
 import { ContentPasteSearchOutlined } from "@mui/icons-material";
 
-export const paymentScuccess =
+export const paymentScuccessAction =
   ({ paymentId, paymentLinkId, jwt }) =>
   async (dispatch) => {
     dispatch({ type: PROCEED_PAYMENT_REQUEST });

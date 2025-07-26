@@ -4,6 +4,7 @@ import SalonDetail from "./SalonDetail";
 import SalonServiceDetails from "./SalonServiceDetails";
 import CreateReviewForm from "../Reviews/CreateReviewForm";
 import Review from "../Reviews/Review";
+import { useParams } from "react-router-dom";
 
 const tabs = [
   { name: "All Services" },
@@ -17,6 +18,9 @@ const SalonDetails = () => {
   const handleActiveTab = (tab) => () => {
     setActiveTab(tab);
   };
+  const params = useParams();
+  console.log("params", params)
+
 
   return (
     <div className="px-5 lg:px-20">
