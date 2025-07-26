@@ -44,7 +44,7 @@ const Navbar = () => {
           </Badge>
         </IconButton>
         {/* true */}
-        {false? (
+        {true ? (
           <div className="flex gap-1 items-center">
             <h1 className="text-lg font-semibold"> Salon </h1>
             <IconButton
