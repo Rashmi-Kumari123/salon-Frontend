@@ -2,31 +2,33 @@ import React from "react";
 import { FiberManualRecord } from "@mui/icons-material";
 import { Button } from "@mui/material";
 
-const ServiceCard = () => {
+const ServiceCard = ({ service, isSelected, onSelect, onRemove }) => {
   return (
     <div className="w-full">
       <div className="flex items-center justify-between gap-5">
         <div className="space-y-1 w-[60%]">
           <h1 className="text-2xl font-semibold">
-            Hair Care & Styling Services
+            {service.name}
           </h1>
           <p className="text-gray-500 text-sm">
-            Classic Haircut (Trim & Shape)
+            {service.description}
           </p>
           <div className="flex items-center gap-3">
-            <p>₹200</p>
+            <p> ₹{service.price}</p>
             <FiberManualRecord sx={{ fontSize: "10px", color: "gray" }} />
-            <p>30 mins</p>
+            <p> {service.duration} mins </p>
           </div>
         </div>
         <div className="space-y-3">
           <img
             className="w-32 h-32 object-cover rounded-md"
-            src="https://content.latest-hairstyles.com/wp-content/uploads/professional-bob-cut-with-brushlight-hair-color.jpg"
-            alt="Haircut"
+            src={service.image}
+            alt=""
           />
-          <Button fullWidth variant="outlined">
-            Add
+          <Button onClick={() =>
+              isSelected ? onRemove(service.id) : onSelect(service)
+            }fullWidth variant="outlined">
+            {isSelected ? "remove" : "Add"}
           </Button>
         </div>
       </div>

@@ -1,8 +1,10 @@
 import React from "react";
 import ProfileFieldCard from "./ProfileFieldCard";
 import { Divider } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const {salon, auth} = useSelector(store => store);
   return (
     <div className="lg:px-20 lg:pb-20 space-y-20">
       <div className="w-full lg:w-[70%]">
@@ -11,21 +13,24 @@ const Profile = () => {
           <div className="col-span-2">
             <img
               className="w-full rounded-md h-[15rem] object-cover"
-              src="https://png.pngtree.com/thumb_back/fh260/background/20230527/pngtree-hair-salon-in-orange-and-black-paint-image_2691249.jpg"
+              // src="https://png.pngtree.com/thumb_back/fh260/background/20230527/pngtree-hair-salon-in-orange-and-black-paint-image_2691249.jpg"
+              src = {salon.salon.images[0]}
               alt=""
             />
           </div>
           <div className="col-span-1">
             <img
               className="w-full  rounded-md h-[15rem] object-cover"
-              src="https://st3.depositphotos.com/12039412/16353/i/450/depositphotos_163531582-stock-photo-woman-in-beauty-salon-getting.jpg"
+              // src="https://st3.depositphotos.com/12039412/16353/i/450/depositphotos_163531582-stock-photo-woman-in-beauty-salon-getting.jpg"
+              src = {salon.salon.images[1]}
               alt=""
             />
           </div>
           <div className="col-span-1">
             <img
               className="w-full  rounded-md h-[15rem] object-cover"
-              src="https://images.pexels.com/photos/705255/pexels-photo-705255.jpeg"
+              // src="https://images.pexels.com/photos/705255/pexels-photo-705255.jpeg"
+              src = {salon.salon.images[2]}
               alt=""
             />
           </div>
@@ -37,14 +42,14 @@ const Profile = () => {
           <h1 className="text-2xl font-bold text-gray-600">Owner Details</h1>
         </div>
         <div>
-          <ProfileFieldCard keys={"Owner name"} value={"Rashmi Shah"} />
+          <ProfileFieldCard keys={"Owner name"} value={auth.user?.fullName} />
           <Divider />
           <ProfileFieldCard
             keys={"email"}
-            value={"rashmi@gmail.com"}
+            value={auth.user?.email}
           />
           <Divider />
-          <ProfileFieldCard keys={"role"} value={"salon_owner"} />
+          <ProfileFieldCard keys={"Role"} value={"SALON_OWNER"} />
           <Divider />
           
         </div>
@@ -54,16 +59,16 @@ const Profile = () => {
           <h1 className="text-2xl font-bold text-gray-600">Salon Details</h1>
         </div>
         <div>
-          <ProfileFieldCard keys={"salon name"} value={"Rashmi salon"} />
+          <ProfileFieldCard keys={"Salon Name"} value={salon.salon?.name} />
           <Divider />
           <ProfileFieldCard
-            keys={"salon address"}
-            value={"ambavadi choke, banglore"}
+            keys={"Salon Address"}
+            value={salon.salon?.address || "not provided"}
           />
           <Divider />
-          <ProfileFieldCard keys={"open time"} value={"10:00 AM"} />
+          <ProfileFieldCard keys={"Open Time"} value={salon.salon?.openTime} />
           <Divider />
-          <ProfileFieldCard keys={"close time"} value={"09:00 PM"} />
+          <ProfileFieldCard keys={"Close Time"} value={salon.salon?.closeTime} />
         </div>
       </div>
     </div>

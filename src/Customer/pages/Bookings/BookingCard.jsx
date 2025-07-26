@@ -1,36 +1,39 @@
-import { ArrowRightAlt } from "@mui/icons-material";
+
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 import { Button } from "@mui/material";
 import React from "react";
 
-const BookingCard = () => {
+
+const BookingCard = (booking) => {
   return (
     <div className="p-5 rounded-md bg-slate-100 md:flex items-center justify-between">
       <div className="space-y-2">
-        <h1 className="text-2xl font-bold"> Rashmi Shah Salon</h1>
+        <h1 className="text-2xl font-bold"> {booking.salon.name} </h1>
         <div>
-          <li> Hair Cut </li>
-          <li> Massage Therapy</li>
-          <li> Hair Color </li>
+          {booking.services.map((service) => (
+            <li key={service.id}>{service.name}</li>
+          ))}
         </div>
         <div>
           <p className="font-semibold">
-            Time & Date <ArrowRightAlt /> 2025-06-26
+            Time & Date <ArrowRightAltIcon /> {booking.startTime?.split("T")[0]}{" "}
           </p>
-          <p className="text-slate-700">01:00:00 To 02:00:00</p>
+          <p className="text-slate-700">{booking.startTime?.split("T")[1]} To{" "}
+            {booking.endTime?.split("T")[1]}</p>
         </div>
       </div>
 
       <div className="space-y-2">
         <img
           className="h-28 w-28"
-          src="https://media.istockphoto.com/id/1064701364/photo/little-girl-at-a-hairdresser.jpg?s=612x612&w=0&k=20&c=qtlcrfhVWf4NeXppjYl3-haQ0j-YicA5gINR9kEzl20="
+          src={booking.salon.images[0]} 
           alt=""
         />
-        <p className="text-center">₹199</p>
+        <p className="text-center">₹{booking.totalPrice}</p>
 
         <Button color="error" variant="outlined">
-          {" "}
-          "CANCELLED"{" "}
+          
+          "CANCELLED"
         </Button>
       </div>
     </div>

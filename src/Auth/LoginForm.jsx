@@ -1,13 +1,13 @@
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { useFormik } from 'formik';
 import React from 'react'
-// import { useDispatch } from 'react-redux';
-// import { loginUser } from '../Redux/Auth/action';
-// import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../Redux/Auth/action';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
         email: "",
@@ -15,7 +15,7 @@ const LoginForm = () => {
     },
     onSubmit: (values) => {
         console.log("Submitting", values);
-        // dispatch(loginUser({ email: values.email, password: values.password, navigate: navigate }))
+        dispatch(loginUser({ data: values, navigate }));
     },
 });
   return (
@@ -42,6 +42,7 @@ const LoginForm = () => {
         name="password"
         id="password"
         label="Password "
+        type = "password"
         onChange={formik.handleChange}
         value={formik.values.password}
         required

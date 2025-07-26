@@ -7,6 +7,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
+import { useSelector } from "react-redux";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,10 +15,13 @@ const Navbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const navigate = useNavigate();
+  const { auth, notification } = useSelector((store) => store);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -39,14 +43,16 @@ const Navbar = () => {
         <Button variant="outlined">Become partner</Button>
 
         <IconButton onClick={() => navigate("/notification")}>
-          <Badge badgeContent={5}>
+          <Badge badgeContent={notification.unreadCount}>
             <NotificationsActive color="primary" />
           </Badge>
         </IconButton>
-        {/* true */}
-        {true ? (
+
+        {auth.user?.id ? (
           <div className="flex gap-1 items-center">
-            <h1 className="text-lg font-semibold"> Salon </h1>
+            <h1 className="text-lg font-semibold">
+              {auth.user?.fullName}
+            </h1>
             <IconButton
               id="basic-button"
               aria-controls={open ? "basic-menu" : undefined}
@@ -54,7 +60,9 @@ const Navbar = () => {
               aria-expanded={open ? "true" : undefined}
               onClick={handleClick}
             >
-              <Avatar sx={{ bgcolor: "green" }}>S</Avatar>
+              <Avatar sx={{ bgcolor: "green" }}>
+                {auth.user?.fullName?.[0].toUpperCase()}
+              </Avatar>
             </IconButton>
 
             <Menu
@@ -74,6 +82,18 @@ const Navbar = () => {
               >
                 My Bookings
               </MenuItem>
+
+              {auth.user?.role === "SALON_OWNER" && (
+                <MenuItem
+                  onClick={() => {
+                    navigate("/salon-dashboard");
+                    handleClose();
+                  }}
+                >
+                  Salon Dashboard
+                </MenuItem>
+              )}
+
               <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
           </div>

@@ -2,8 +2,15 @@ import React from "react";
 import { Avatar, Grid, IconButton, Box, Rating } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { red } from "@mui/material/colors";
+import { deleteReview } from "../../../../Redux/Review/action";
+import { useDispatch, useSelector } from "react-redux";
 
-const ReviewCard = () => {
+const ReviewCard = ({item}) => {
+  const { auth, user } = useSelector(store => store);
+  const dispatch = useDispatch()
+  const handleDeleteReview = () => {
+    dispatch(deleteReview({ reviewId: item.id, jwt: localStorage.getItem("jwt") || "" }))
+  };
   return (
     <div className="flex justify-between">
       <Grid container spacing={2} className="w-full">
@@ -14,7 +21,7 @@ const ReviewCard = () => {
               className="text-white"
               sx={{ width: 56, height: 56, bgcolor: "#9155FD" }}
             >
-              {/* Placeholder for user initials */}R
+              {item.user.fullName[0]}
             </Avatar>
           </Box>
         </Grid>
@@ -22,20 +29,21 @@ const ReviewCard = () => {
         <Grid item xs={10}>
           <div className="space-y-2">
             <div>
-              <p className="font-semibold text-lg">Rashmi Saloon</p>
+              <p className="font-semibold text-lg">{item.user.fullName}</p>
               <p className="opacity-70">2025-06-25 17:34:57.140056</p>
             </div>
 
-            <Rating readOnly value={4.5} name="half-rating" precision={0.5} />
+            <Rating readOnly value={item.rating} name="half-rating" precision={0.5} />
 
-            <p>Good service is available here</p>
+            <p>{item.reviewText}</p>
           </div>
         </Grid>
         {/* Delete Button */}
         <Grid item xs={1}>
-          <IconButton>
+          {item.user?.id === auth.user?.id && 
+          <IconButton onClick={handleDeleteReview}>
             <DeleteIcon sx={{ color: red[700] }} />
-          </IconButton>
+          </IconButton>}
         </Grid>
       </Grid>
     </div>

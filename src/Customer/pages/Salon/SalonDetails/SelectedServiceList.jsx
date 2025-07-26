@@ -2,14 +2,14 @@ import React from "react";
 import { Close } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
 
-const SelectedServiceList = () => {
+const SelectedServiceList = ({ services, handleRemoveService }) => {
   return (
     <div className="space-y-2 my-5">
-      {[1, 1, 1, 1, 1].map((item) => (
+      {services.map((item) => (
         <div className="py-2 px-4 rounded-md bg-slate-100 flex items-center justify-between">
-          <h1 className="font-thin">Girls Hair Styling</h1>
-          <p>₹399</p>
-          <IconButton>
+          <h1 className="font-thin"> {item.name} </h1>
+          <p>₹{item.price}</p>
+          <IconButton onClick={() => handleRemoveService(item.id)}> 
             <Close />
           </IconButton>
         </div>

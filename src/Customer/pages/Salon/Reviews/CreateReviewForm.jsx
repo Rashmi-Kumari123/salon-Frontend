@@ -2,24 +2,29 @@ import React from "react";
 import { useFormik } from "formik";
 // import * as Yup from "yup";
 import { TextField, Button, Box, Rating, InputLabel } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { createReview } from "../../../../Redux/Review/action";
 
 const CreateReviewForm = () => {
+  const dispatch = useDispatch();
+  const { review } = useSelector((store) => store.review); 
+  const { id } = useParams();
+
   const formik = useFormik({
     initialValues: {
       reviewText: "",
-      reviewRating: 0,
+      rating: 0,
     },
-    // validationSchema: Yup.object({
-    //   reviewText: Yup.string()
-    //     .required("Review text is required")
-    //     .min(10, "Review must be at least 10 characters long"),
-    //   reviewRating: Yup.number()
-    //     .required("Rating is required")
-    //     .min(0, "Rating must be at least 0")
-    //     .max(5, "Rating cannot be more than 5"),
-    // }),
     onSubmit: (values) => {
-      console.log("Form Submitted:", values);
+      if (id) {
+        dispatch(createReview({ salonId: id,
+          jwt: localStorage.getItem("jwt"),
+          reviewData : values
+         }));
+      }
+      console.log("Submitting", values);
     },
   });
 
@@ -48,11 +53,11 @@ const CreateReviewForm = () => {
       <div className="space-y-2">
         <InputLabel>Rating</InputLabel>
         <Rating
-          id="reviewRating"
-          name="reviewRating"
-          value={formik.values.reviewRating}
+          id="rating"
+          name="rating"
+          value={formik.values.rating}
           onChange={(event, newValue) =>
-            formik.setFieldValue("reviewRating", newValue)
+            formik.setFieldValue("rating", newValue)
           }
           onBlur={formik.handleBlur}
           precision={0.5}
