@@ -1,29 +1,8 @@
 import React from 'react'
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-
-import { fetchSalonById } from '../../../../Redux/salon/action';
-import { getCategoriesBySalon } from '../../../../Redux/Category/action';
-
-
-
+import { useSelector } from 'react-redux'
 
 const SalonDetail = () => {
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const { salon } = useSelector(store => store);
-
-      useEffect(() => {
-          if (id) {
-              dispatch(fetchSalonById(id));
-              dispatch(getCategoriesBySalon({
-      jwt: localStorage.getItem("jwt"),
-      salonId: id,
-})); 
-
-          }
-      }, [id, dispatch]);
+    const {salon}=useSelector(store=>store)
   return (
     <div className="space-y-5 mb-20">
     <section className="grid grid-cols-2  gap-3">
@@ -66,4 +45,4 @@ const SalonDetail = () => {
   )
 }
 
-export default SalonDetail;
+export default SalonDetail

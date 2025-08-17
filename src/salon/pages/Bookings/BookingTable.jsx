@@ -1,5 +1,4 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
@@ -7,6 +6,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Button, IconButton, styled } from "@mui/material";
+
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+
+  fetchSalonBookings,
+  updateBookingStatus,
+} from "../../../Redux/Booking/action";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -28,19 +36,28 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
+export default function BookingTable() {
+  const { salon, service, booking } = useSelector((store) => store);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+  React.useEffect(() => {
+    
+    dispatch(fetchSalonBookings({ jwt: localStorage.getItem("jwt") }));
+  }, []);
 
-export default function BookingTables() {
+  
+  const handleCancelBooking = (id) => () => {
+    const status=booking.status==="CANCELLED"?"PENDING":"CANCELLED"
+    dispatch(
+      updateBookingStatus({
+        bookingId: id,
+        status: "CANCELLED",
+        jwt: localStorage.getItem("jwt"),
+      })
+    );
+  };
+
   return (
     <>
       <h1 className="pb-5 font-bold text-xl">Bookings</h1>
@@ -50,28 +67,51 @@ export default function BookingTables() {
           <TableHead>
             <TableRow>
               <StyledTableCell>Services</StyledTableCell>
-              <StyledTableCell align="right">Time & Date</StyledTableCell>
-              <StyledTableCell align="right">PRICE</StyledTableCell>
-              <StyledTableCell align="right">Customer</StyledTableCell>
-              <StyledTableCell align="right">Status</StyledTableCell>
+              <StyledTableCell>Time & Date</StyledTableCell>
+              <StyledTableCell>PRICE</StyledTableCell>
+              <StyledTableCell>Customer</StyledTableCell>
+              <StyledTableCell>
+                Status
+              </StyledTableCell>
               <StyledTableCell align="right">Cancel</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <StyledTableRow key={row.name}>
+            {booking.bookings.map((item) => (
+              <StyledTableRow key={item.id}>
                 <StyledTableCell component="th" scope="row">
-                  {row.name}
+                  <ul className="space-y-2">
+                    {item.services.map((service) => (
+                      <li>{service.name}</li>
+                    ))}
+                  </ul>
                 </StyledTableCell>
 
-                <StyledTableCell align="right">{row.calories}</StyledTableCell>
-                <StyledTableCell align="right">{row.fat}</StyledTableCell>
-                <StyledTableCell className="space-y-2" align="right">
-                  <p> Full Name : code with Rashmi</p>
-                  <p> codewithRashmi@gmail.com</p>
+                <StyledTableCell className="space-y-2">
+                  
+                  <p> Date : {item.startTime?.split("T")[0]}</p>
+                  <p> Time : {item.startTime?.split("T")[1]}</p>
                 </StyledTableCell>
-                <StyledTableCell align="right">{row.protein}</StyledTableCell>
-                <StyledTableCell align="right">{row.protein}</StyledTableCell>
+                <StyledTableCell>₹{item.totalPrice}</StyledTableCell>
+                <StyledTableCell className="space-y-2">
+                  <p>Full Name : {item.customer?.fullName || " "}</p>
+                  <p>Email : {item.customer?.email || " "}</p>
+                </StyledTableCell>
+                <StyledTableCell >
+                  <p className={`${item.status=="CONFIRMED"?"text-green-500":item.status=="PENDING"?"text-blue-500":"text-red-500"} `}>{item.status}</p>
+                  </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Button
+                  onClick={handleCancelBooking(item.id)}
+                  disabled={item.status === "CANCELLED"}
+                    color="error"
+                    variant={
+                      item.status === "CANCELLED" ? "contained" : "outlined"
+                    }
+                  >
+                    {item.status === "CANCELLED" ? "CANCELLED" : "Cancel"}
+                  </Button>
+                </StyledTableCell>
               </StyledTableRow>
             ))}
           </TableBody>

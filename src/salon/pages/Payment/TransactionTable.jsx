@@ -1,52 +1,67 @@
 import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
+import { redableDateTime } from "../../../util/redableDateTime";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSalonBookings } from "../../../Redux/Booking/action";
 
 export default function TransactionTable() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const { booking } = useSelector((store) => store);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    dispatch(fetchSalonBookings({ jwt: localStorage.getItem("jwt") }));
+  }, []);
+
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell align="right">Customer Details</TableCell>
-            <TableCell align="right"> Booking </TableCell>
-            <TableCell align="right">Amount</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
+    <>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Date</TableCell>
+              <TableCell>Customer Details</TableCell>
+              <TableCell>Booking</TableCell>
+              <TableCell align="right">Amount</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {booking.bookings.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell align="left">
+                  <div className="space-y-1">
+                    <h1 className="font-medium">
+                      {item.startTime.split("T")[0]}
+                    </h1>
+                    
+                  </div>
+                </TableCell>
+                <TableCell component="th" scope="row">
+                  <div className="space-y-2">
+                    <h1>{item.customer.fullName}</h1>
+                    <h1 className="font-semibold">{item.customer.email}</h1>
+                    <h1 className="font-bold text-gray-600">
+                      {item.customer.mobile}
+                    </h1>
+                  </div>
+                </TableCell>
+                <TableCell>
+                  Booking Id : <strong> {item.id} </strong>
+                </TableCell>
+                <TableCell align="right">₹{item.totalPrice}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

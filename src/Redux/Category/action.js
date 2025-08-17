@@ -1,5 +1,5 @@
 // actions/categoryActions.js
-
+import axios from "axios";
 import {
   CREATE_CATEGORY_REQUEST,
   CREATE_CATEGORY_SUCCESS,

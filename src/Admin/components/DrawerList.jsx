@@ -1,78 +1,88 @@
-import React from "react";
-import { ListItemIcon, ListItemText, Divider } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import * as React from "react";
 
-const DrawerList = ({ menu, menu2, toggleDrawer }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  const handleClick = (item) => () => {
-    navigate(item.path);
-    if (toggleDrawer) {
-      toggleDrawer(false)();
-    }
-  };
+import DrawerList from "../../admin seller/components/drawerList/DrawerList";
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import AddIcon from '@mui/icons-material/Add';
+import HomeIcon from '@mui/icons-material/Home';
+import ElectricBoltIcon from '@mui/icons-material/ElectricBolt';
+import IntegrationInstructionsIcon from '@mui/icons-material/IntegrationInstructions';
+import { Category } from "@mui/icons-material";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import LogoutIcon from '@mui/icons-material/Logout';
+const menu = [
+    {
+        name: "Dashboard",
+        path: "/admin",
+        icon: <DashboardIcon className="text-primary-color" />,
+        activeIcon: <DashboardIcon className="text-white" />,
+    },
+    // {
+    //     name: "Coupons",
+    //     path: "/admin/coupon",
+    //     icon: <IntegrationInstructionsIcon className="text-primary-color" />,
+    //     activeIcon: <IntegrationInstructionsIcon className="text-white" />,
+    // },
+    // {
+    //     name: "Add New Coupon",
+    //     path: "/admin/add-coupon",
+    //     icon: <AddIcon className="text-primary-color" />,
+    //     activeIcon: <AddIcon className="text-white" />,
+    // },
+    // {
+    //     name: "Home Page",
+    //     path: "/admin/home-grid",
+    //     icon: <HomeIcon className="text-primary-color" />,
+    //     activeIcon: <HomeIcon className="text-white" />,
+    // },
+    // {
+    //     name: "Electronics Category",
+    //     path: "/admin/electronics-category",
+    //     icon: <ElectricBoltIcon className="text-primary-color" />,
+    //     activeIcon: <ElectricBoltIcon className="text-white" />,
+    // },
+    // {
+    //     name: "Shop By Category",
+    //     path: "/admin/shop-by-category",
+    //     icon: <Category className="text-primary-color" />,
+    //     activeIcon: <Category className="text-white" />,
+    // },
+    // {
+    //     name: "Deals",
+    //     path: "/admin/deals",
+    //     icon: <LocalOfferIcon className="text-primary-color" />,
+    //     activeIcon: <LocalOfferIcon className="text-white" />,
+    // },
+   
+];
 
-  console.log("location :", location);
+const menu2 = [
 
-  return (
-    <div className="h-full">
-      <div className="flex flex-col justify-between h-full w-[300px] border-r py-5">
-        <div className="space-y-2">
-          {menu.map((item, index) => (
-            <div
-              key={index}
-              onClick={handleClick(item)}
-              className="cursor-pointer pr-9"
-            >
-              <div
-                className={`${
-                  item.path === location.pathname
-                    ? "bg-primary-color text-white"
-                    : "text-primary-color"
-                } flex items-center px-5 py-3 rounded-r-full`}
-              >
-                <ListItemIcon>
-                  {item.path === location.pathname
-                    ? item.activeIcon
-                    : item.icon}
-                </ListItemIcon>
-                <ListItemText>{item.name}</ListItemText>
-              </div>
-            </div>
-          ))}
-        </div>
+    // {
+    //     name: "Account",
+    //     path: "/admin",
+    //     icon: <AccountBoxIcon className="text-primary-color" />,
+    //     activeIcon: <AccountBoxIcon className="text-white" />,
+    // },
+    {
+        name: "Logout",
+        path: "/",
+        icon: <LogoutIcon className="text-primary-color" />,
+        activeIcon: <LogoutIcon className="text-white" />,
+    },
 
-        <div className="space-y-4">
-          <Divider />
-          <div className="space-y-2">
-            {menu2.map((item, index) => (
-              <div
-                key={index}
-                onClick={handleClick(item)}
-                className="cursor-pointer pr-9"
-              >
-                <div
-                  className={`${
-                    item.path === location.pathname
-                      ? "bg-primary-color text-white"
-                      : "text-primary-color"
-                  } flex items-center px-5 py-3 rounded-r-full`}
-                >
-                  <ListItemIcon>
-                    {item.path === location.pathname
-                      ? item.activeIcon
-                      : item.icon}
-                  </ListItemIcon>
-                  <ListItemText>{item.name}</ListItemText>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+]
 
-export default DrawerList;
+
+
+const AdminDrawerList = ({ toggleDrawer }) => {
+
+    return (
+        <>
+            <DrawerList toggleDrawer={toggleDrawer} menu={menu} menu2={menu2}/>
+        </>
+    );
+}; 
+
+export default AdminDrawerList;

@@ -1,60 +1,91 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { services } from "../../../Data/Services";
 import HomeServiceCard from "./HomeServiceCard";
-// import SalonList from "../Salon/SalonList";
+import SalonList from "../Salon/SalonList";
 import Banner from "./Banner";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSalons } from "../../../Redux/Salon/action";
+import ContactForm from "./ContactForm";
 
 const Home = () => {
+  const { auth } = useSelector((store) => store);
+  const { salon } = useSelector((store) => store);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchSalons());
+  }, []);
+
   return (
-    <div className="space-y-20 ">
+    <div className="space-y-20 max-w-[1440px] mx-auto">
+      {/* Banner Section */}
       <section>
         <Banner />
       </section>
-      <section className="space-y-10 lg:space-y-0 lg:flex items-center gap-5 px-20">
-        <div className="w-full lg:w-1/2 ">
-          <h1 className="text-2xl font-semibold pb-9">
-            What are you waiting for, Bestie? 👀 👑 Your glow-up starts here!"
-          </h1>
-          <div className="flex flex-wrap justify-center items-center gap-5">
+
+      {/* Services + Images */}
+      <section className="px-5 sm:px-10 lg:px-20 space-y-10 lg:space-y-0 lg:flex lg:flex-row flex-col-reverse gap-5 items-center box-border">
+        {/* Services */}
+        <div className="flex-1">
+          <div className="overflow-hidden h-10 sm:h-12 relative mb-6 sm:mb-8">
+            <h1 className="animate-marquee whitespace-nowrap text-2xl font-semibold text-center lg:text-left">
+              What are you looking for, Bestie? 👀
+            </h1>
+          </div>
+
+          <div className="flex flex-wrap justify-center lg:justify-start items-center gap-4 sm:gap-5">
             {services.map((item) => (
               <HomeServiceCard key={item.id} item={item} />
             ))}
           </div>
         </div>
-        <div className="w-full lg:w-1/2 border grid gap-3 grid-cols-2 grid-rows-12 h-[45vh] md:h-[90vh] ">
-          <div className="row-span-7">
+
+        {/* Image Grid */}
+        <div className="w-full lg:w-1/2 grid grid-cols-2 grid-rows-6 gap-3 min-h-[60vh] md:min-h-[90vh] box-border">
+          <div className="row-span-3">
             <img
-              className="h-full w-full rounded-md"
-              src="https://img.freepik.com/premium-photo/stylist-makes-curls-curling-girl-with-long-brown-hair-professional-beauty-salon_118086-3619.jpg?semt=ais_items_boosted&w=740"
+              className="w-full h-full object-cover rounded-md"
+              src="https://promotion.lakmesalon.in/lf/hairday/ghd/model/2.png"
+              alt="Hair Styling"
+            />
+          </div>
+          <div className="row-span-2">
+            <img
+              className="w-full h-full object-cover rounded-md"
+              src="https://content.jdmagicbox.com/quickquotes/images_main/beard-styling-600083166-q62816qk.jpg"
               alt=""
             />
           </div>
-          <div className="row-span-5">
+          <div className="row-span-3">
             <img
-              className="h-full w-full rounded-md"
-              src="https://img.freepik.com/free-photo/portrait-hairstylist-female-customer_329181-1955.jpg?semt=ais_items_boosted&w=740"
+              className="w-full h-full object-cover rounded-md"
+              src="https://content.jdmagicbox.com/quickquotes/images_main/hair-styling-600083178-2dug5d6o.jpg"
               alt=""
             />
           </div>
-          <div className="row-span-7">
+          <div className="row-span-2">
             <img
-              className="h-full w-full rounded-md"
-              src="https://images.pexels.com/photos/5069455/pexels-photo-5069455.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt=""
-            />
-          </div>
-          <div className="row-span-5">
-            <img
-              className="h-full w-full rounded-md"
-              src="https://images.pexels.com/photos/3757952/pexels-photo-3757952.jpeg?auto=compress&cs=tinysrgb&w=600"
-              alt=""
+              className="w-full h-full object-cover rounded-md"
+              src="https://content.jdmagicbox.com/quickquotes/images_main/eye-brow-threading-600083188-wz4u5tn8.jpg"
+              alt="Eyebrow Threading"
             />
           </div>
         </div>
+
       </section>
-      <section className="px-20">
-        <h1 className="text-3xl font-bold pb-10 ">Book Your Favorite Salon</h1>
-        {/* <SalonList salons={salon.salons} /> */}
+
+   {/* Salon List - Only for CUSTOMER */}
+      {auth?.user?.role === "CUSTOMER" && (
+        <section className="px-5 sm:px-10 lg:px-20">
+          <h1 className="text-3xl font-bold pb-10 text-center lg:text-left">
+            👉 Book Your Favourite Salon
+          </h1>
+          <SalonList salons={salon.salons} />
+        </section>
+      )}
+
+      <section className="Get In Touch">
+        <ContactForm/>
       </section>
     </div>
   );

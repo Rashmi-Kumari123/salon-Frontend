@@ -1,28 +1,32 @@
 import React from "react";
-
-import { Routes, Route } from "react-router-dom";
-import HomePage from "../salon/pages/Home/HomePage";
-import ServicesTable from "../salon/pages/Salon Service/ServicesTable";
-import CreateServiceForm from "../salon/pages/Salon Service/CreateServiceForm";
-import Payment from "../salon/pages/Payment/Payment";
-import Notification from "../Customer/pages/Notifications/Notification";
-import Category from "../salon/pages/Category/Category";
-import TransactionTable from "../salon/pages/Payment/TransactionTable";
-import BookingTables from "../salon/pages/Bookings/BookingTable";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "../salon/pages/SellerDashboard/HomePage";
+import Services from "../salon/pages/Salon Service/Services";
+import ServiceForm from "../salon/pages/Salon Service/AddServiceForm";
 import Profile from "../salon/pages/Account/Profile";
+import Category from "../salon/pages/Category/Category";
+import BookingTable from "../salon/pages/Bookings/BookingTable";
+import Payment from "../salon/pages/Payment/Payment";
+import TransactionTable from "../salon/pages/Payment/TransactionTable";
+import Notification from "../Customer/pages/Notifications/Notification";
 
 const SalonRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/services" element={<ServicesTable />} />
-      <Route path="/add-services" element={<CreateServiceForm />} />
-      <Route path="/bookings" element={<BookingTables />} />
+      <Route path="/services" element={<Services />} />
+      <Route path="/services/:id" element={<Services />} />
+      <Route path="/add-services" element={<ServiceForm />} />
+
+      <Route path="/bookings" element={<BookingTable />} />
+
+      <Route path="/account" element={<Profile />} />
+
       <Route path="/category" element={<Category />} />
+      <Route path="/category/:id" element={<Category />} />
+      <Route path="/payment" element={<Payment />} />
       <Route path="/transaction" element={<TransactionTable />} />
       <Route path="/notifications" element={<Notification />} />
-      <Route path="/payment" element={<Payment />} />
-      <Route path="/account" element={<Profile />} />
     </Routes>
   );
 };
