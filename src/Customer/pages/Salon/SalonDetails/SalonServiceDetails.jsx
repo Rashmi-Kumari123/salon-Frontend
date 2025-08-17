@@ -3,15 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createBooking,
   fetchBookedSlots,
-  
+  fetchCustomerBookings,
 } from "../../../../Redux/Booking/action";
 import { useParams } from "react-router-dom";
 import CategoryCard from "./CategoryCard";
 import ServiceCard from "./ServiceCard";
 import { Alert, Button, Divider, Modal, Snackbar } from "@mui/material";
 import { isServiceSelected } from "../../../../util/isServiceSelected";
-import { getTodayDate } from "../../../../util/getTodayDate";
-
 import {
   ArrowRight,
   RemoveShoppingCart,
@@ -21,8 +19,8 @@ import SelectedServiceList from "./SelectedServiceList";
 import { DateTimePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { fetchServicesBySalonId } from "../../../../Redux/Salon Services/action";
-
-
+import { getTodayDate } from "../../../../util/getTodayDate";
+// import { getTodayDate } from "@mui/x-date-pickers/internals";
 
 const SalonServiceDetails = () => {
   const { salon, service, category, booking } = useSelector((store) => store);
@@ -32,7 +30,7 @@ const SalonServiceDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [bookingData, setBookingData] = useState({
+  const [bookingData, setBookingData] = useState({  
     services: [],
     time: null,
   });
@@ -112,14 +110,24 @@ const SalonServiceDetails = () => {
               "https://cdn.pixabay.com/photo/2020/05/21/11/42/hair-salon-5200393_640.jpg",
           }}
         />
-        {category.categories.map((item, index) => (
+        {/* {category.categories.map((item, index) => (
           <CategoryCard
             key={item.id}
             selectedCategory={selectedCategory}
             handleSelectCategory={handleSelectCategory}
             item={item}
           />
-        ))}
+        ))} */}
+        {Array.isArray(category.categories) &&
+  category.categories.map((item, index) => (
+    <CategoryCard
+      key={item.id}
+      selectedCategory={selectedCategory}
+      handleSelectCategory={handleSelectCategory}
+      item={item}
+    />
+))}
+
       </section>
       <section className="space-y-2 lg:w-[50%] px-5 lg:px-20 overflow-y-auto">
         {service.services.map((item) => (
@@ -202,7 +210,7 @@ const SalonServiceDetails = () => {
                     setBookingData((prev) => ({ ...prev, time: localDate }));
                   }
                 }}
-                label="Select Time Slot"
+                label="Basic date time picker"
               />
             </LocalizationProvider>
             <div>

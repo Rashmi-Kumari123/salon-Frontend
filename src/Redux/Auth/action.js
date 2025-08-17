@@ -25,8 +25,8 @@ export const registerUser = (userData) => async (dispatch) => {
       userData.userData
     );
     const user = response.data;
-    if (user?.jwt) {
-      localStorage.setItem("jwt", user.jwt);
+    if (user.data?.jwt) {
+      localStorage.setItem("jwt", user.data.jwt);
       userData.navigate("/");
     }
     console.log("registerr :- ", user);
@@ -49,11 +49,11 @@ export const loginUser = (userData) => async (dispatch) => {
       userData.data
     );
     const user = response.data;
-    if (user?.jwt) {
-      localStorage.setItem("jwt", user.jwt);
-      if (user?.role === "ROLE_ADMIN") {
+    if (user.data?.jwt) {
+      localStorage.setItem("jwt", user.data.jwt);
+      if (user.data?.role === "ROLE_ADMIN") {
         userData.navigate("/admin");
-      } else if (user?.role === "ROLE_SALON_OWNER") {
+      } else if (user.data?.role === "ROLE_SALON_OWNER") {
         userData.navigate("/salon-dashboard");
       }
       else{

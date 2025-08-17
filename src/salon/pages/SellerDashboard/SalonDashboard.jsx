@@ -1,32 +1,30 @@
-import {React, useEffect} from "react";
-import SalonDrawerList from "../../components/SideBar/SalonDrawerList";
-import Navbar from "../../../Admin/components/Navbar";
+import React, { useEffect } from "react";
+
+
+import Navbar from "../../../admin seller/components/navbar/Navbar";
 import SalonRoutes from "../../../routes/SalonRoutes";
 import { useDispatch } from "react-redux";
-import { fetchSalonByOwner } from "../../../Redux/salon/action";
+import { fetchSalonByOwner } from "../../../Redux/Salon/action";
+import SalonDrawerList from "../../components/SideBar/DrawerList";
 import { getSalonReport } from "../../../Redux/Booking/action";
-
 
 const SalonDashboard = () => {
   const dispatch=useDispatch();
- 
+  // const {}
   useEffect(() => {
     dispatch(fetchSalonByOwner(localStorage.getItem("jwt")));
     dispatch(getSalonReport(localStorage.getItem("jwt")))
   }, []);
 
+
   return (
     <div className="min-h-screen">
-      <Navbar DrawerList={SalonDrawerList} />
+      <Navbar DrawerList={SalonDrawerList}/>
       <section className="lg:flex lg:h-[90vh]">
         <div className="hidden lg:block h-full">
-          <SalonDrawerList />
+        <SalonDrawerList/>
         </div>
-        <div className="p-19 w-full 1g:w-[8@%] overflow-y-auto}">
-          |{/* <BookingTables/> */}
-          {/* <ServicesTable/> */}
-          {/* <TransactionTable/> */}
-          {/* <Category/> */}
+        <div className="p-10 w-full lg:w-[80%]  overflow-y-auto">
           <SalonRoutes />
         </div>
       </section>

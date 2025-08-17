@@ -28,14 +28,14 @@ const authReducer = (state = initialState, action) => {
 
     case REGISTER_SUCCESS:
     case LOGIN_SUCCESS:
-      return { ...state, isLoading: false,jwt:action.payload?.jwt };
+      return { ...state, isLoading: false,jwt:action.payload?.data.jwt };
 
     case GET_USER_SUCCESS:
       return {
         ...state,
         isLoading: false,
         user: action.payload,
-        
+        fetchingUser: false,
       };
     case GET_ALL_CUSTOMERS_SUCCESS:
       return {
@@ -52,7 +52,7 @@ const authReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload,
-        
+        fetchingUser: false,
       };
     case LOGOUT:
       localStorage.removeItem("jwt");
